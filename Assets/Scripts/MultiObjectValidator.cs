@@ -23,10 +23,15 @@ public class MultiObjectValidator : MonoBehaviour
 
 			if (obj.solved) continue;
 
-			float distance = Vector3.Distance(
-				obj.playerObject.position,
-				obj.referenceObject.position
-			);
+			Vector3 playerPos = obj.playerObject.position;
+			Vector3 refPos = obj.referenceObject.position;
+
+			// Ignore Y (height)
+			playerPos.y = 0f;
+			refPos.y = 0f;
+
+			float distance = Vector3.Distance(playerPos, refPos);
+
 			float angle = Quaternion.Angle(
 				obj.playerObject.rotation,
 				obj.referenceObject.rotation
@@ -36,6 +41,10 @@ public class MultiObjectValidator : MonoBehaviour
 				obj.solved = true;
 				obj.playerObject.position = obj.referenceObject.position;
 				obj.playerObject.rotation = obj.referenceObject.rotation;
+
+				ObjectManipulator manipulator = obj.playerObject.GetComponent<ObjectManipulator>();
+				if (manipulator != null)
+					manipulator.Lock();
 			}
 			else
 			{

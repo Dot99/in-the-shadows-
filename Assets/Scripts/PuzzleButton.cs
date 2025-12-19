@@ -16,7 +16,7 @@ public class PuzzleButton : MonoBehaviour
 
     void Start()
     {
-        bool testMode = GameMode.IsTestMode;
+        bool testMode = GameState.IsTestMode;
         int unlocked = testMode ? int.MaxValue : SaveManager.GetUnlockedPuzzle();
 
         if (puzzleIndex > unlocked)
@@ -35,6 +35,7 @@ public class PuzzleButton : MonoBehaviour
 
     public void LoadPuzzle()
     {
+        GameState.instance.PuzzleIndex = puzzleIndex;
         SceneManager.LoadScene(puzzleSceneName);
     }
 }

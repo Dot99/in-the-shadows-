@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        GameMode.IsTestMode = false;
+        GameState.IsTestMode = false;
         SaveManager.ResetSave();
         SaveManager.SetUnlockedPuzzle(0);
         SceneManager.LoadScene("PuzzleSelect");
@@ -25,13 +25,13 @@ public class MainMenuManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        GameMode.IsTestMode = false;
+        GameState.IsTestMode = false;
         SceneManager.LoadScene("PuzzleSelect");
     }
 
     public void TestMode()
     {
-        GameMode.IsTestMode = true;
+        GameState.IsTestMode = true;
         SceneManager.LoadScene("PuzzleSelect");
     }
 
